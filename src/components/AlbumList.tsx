@@ -23,9 +23,15 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
         {searchedArtist}
       </h2>
 
-      {/* {albuns.map(
-
-      )} */}
+      {albuns.map((album) => {
+        return (
+          <div key={ album.collectionId }>
+            <img src={ album.artworkUrl100 } alt="album-cover" />
+            <h3>{album.collectionName}</h3>
+            <p>{album.artistName}</p>
+          </div>
+        );
+      })}
     </>
   );
 }
