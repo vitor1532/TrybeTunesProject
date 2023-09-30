@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AlbumType } from '../types';
 
 type AlbumListProps = {
@@ -24,11 +25,23 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
       </h2>
 
       {albuns.map((album) => {
+        const {
+          collectionId,
+          artworkUrl100,
+          collectionName,
+          artistName,
+        } = album;
         return (
-          <div key={ album.collectionId }>
-            <img src={ album.artworkUrl100 } alt="album-cover" />
-            <h3>{album.collectionName}</h3>
-            <p>{album.artistName}</p>
+          <div key={ collectionId }>
+            <img src={ artworkUrl100 } alt="album-cover" />
+            <h3>{collectionName}</h3>
+            <p>{artistName}</p>
+            <Link
+              data-testid={ `link-to-album-${collectionId}` }
+              to={ `/album/${collectionId}` }
+            >
+              See Album
+            </Link>
           </div>
         );
       })}
