@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AlbumType, ChangeType } from '../../types';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
+import AlbumList from '../../components/AlbumList';
 
 function Search() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,23 +30,26 @@ function Search() {
 
   return (
     isLoading ? (<h1>Carregando...</h1>) : (
-      <form onSubmit={ handleSubmit }>
-        <input
-          data-testid="search-artist-input"
-          type="text"
-          name="artist"
-          id="artist"
-          placeholder="Nome do Artista"
-          value={ artist }
-          onChange={ handleChange }
-        />
-        <button
-          disabled={ isDisabled }
-          data-testid="search-artist-button"
-        >
-          Procurar
-        </button>
-      </form>
+      <>
+        <form onSubmit={ handleSubmit }>
+          <input
+            data-testid="search-artist-input"
+            type="text"
+            name="artist"
+            id="artist"
+            placeholder="Nome do Artista"
+            value={ artist }
+            onChange={ handleChange }
+          />
+          <button
+            disabled={ isDisabled }
+            data-testid="search-artist-button"
+          >
+            Procurar
+          </button>
+        </form>
+        <AlbumList />
+      </>
     )
   );
 }
