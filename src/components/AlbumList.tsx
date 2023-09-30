@@ -1,8 +1,14 @@
 import { AlbumType } from '../types';
 
-function AlbumList() {
+type AlbumListProps = {
+  artist: string
+  albuns: AlbumType[] | []
+};
+
+function AlbumList({ artist, albuns }: AlbumListProps) {
+  if (albuns.length === 0) return (<h2>Nenhum álbum foi encontrado</h2>);
   return (
-    <p>oi</p>
+    <p>{artist}</p>
   );
 }
 
