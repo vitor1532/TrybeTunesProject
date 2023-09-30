@@ -26,10 +26,16 @@ function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    const response = await createUser(formInfo);
-    if (response === 'OK') {
+    try {
+      const response = await createUser(formInfo);
+
+      if (response === 'OK') {
+        setIsLoading(false);
+        (navigate('/search'));
+      }
+    } catch (error) {
+      console.error('Error:', error);
       setIsLoading(false);
-      (navigate('/search'));
     }
   };
 
