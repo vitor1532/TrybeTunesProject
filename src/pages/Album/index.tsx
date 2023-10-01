@@ -6,7 +6,7 @@ import { AlbumType, SongType } from '../../types';
 function Album() {
   const [isLoading, setIsLoading] = useState(true);
   const [albumInfo, setAlbumInfo] = useState<AlbumType>();
-  const [musics, setMusics] = useState<(AlbumType | SongType)[]>();
+  const [musics, setMusics] = useState<SongType[]>([]);
   const params = useParams();
 
   const { id } = params;
@@ -16,9 +16,10 @@ function Album() {
     const getAlbumInfo = async () => {
       try {
         const response = await getMusics(id || '');
-        const onlyMusics = response.slice(1);
-        setMusics(onlyMusics);
-        setAlbumInfo(response[0]);
+        const albumData = response[0];
+        const songs = response.slice(1) as SongType[];
+        setAlbumInfo(albumData);
+        setMusics(songs);
         setIsLoading(false);
       } catch (error) {
         console.log('Erro: ', error);
@@ -38,6 +39,26 @@ function Album() {
       </div>
       <div>
         <h3>Musics: </h3>
+        {musics.map((music) => {
+          const {
+            trackId,
+            trackName,
+            previewUrl,
+          } = music;
+          return (
+            <div key={ trackId }>
+              <h3>{trackName}</h3>
+              <audio data-testid="audio-component" src={ previewUrl } controls>
+                <track kind="captions" />
+                O seu navegador não suporta o elemento
+                {' '}
+                {' '}
+                <code>audio</code>
+                .
+              </audio>
+            </div>
+          );
+        })}
       </div>
     </>
   );
