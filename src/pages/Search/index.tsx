@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AlbumType, ChangeType } from '../../types';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import AlbumList from '../../components/AlbumList';
+import Loading from '../../components/Loading';
 
 function Search() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,7 @@ function Search() {
     }
   };
 
-  if (isLoading) return (<h1>Carregando...</h1>);
+  if (isLoading) return (<Loading />);
 
   return (
     <>

@@ -3,6 +3,7 @@ import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { ChangeType } from '../../types';
 import { createUser } from '../../services/userAPI';
+import Loading from '../../components/Loading';
 
 const INITIAL_FORM = {
   name: '',
@@ -38,31 +39,30 @@ function Login() {
       setIsLoading(false);
     }
   };
+  if (isLoading) return (<Loading />);
 
   return (
-    isLoading ? (<h1>Carregando...</h1>) : (
-      <div className="form-container">
-        <form onSubmit={ handleSubmit } className="login-form">
-          <label htmlFor="name">
-            <input
-              data-testid="login-name-input"
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Nome"
-              value={ formInfo.name }
-              onChange={ handleChange }
-            />
-          </label>
-          <button
-            disabled={ isDisabled }
-            data-testid="login-submit-button"
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
-    )
+    <div className="form-container">
+      <form onSubmit={ handleSubmit } className="login-form">
+        <label htmlFor="name">
+          <input
+            data-testid="login-name-input"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Nome"
+            value={ formInfo.name }
+            onChange={ handleChange }
+          />
+        </label>
+        <button
+          disabled={ isDisabled }
+          data-testid="login-submit-button"
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
   );
 }
 
