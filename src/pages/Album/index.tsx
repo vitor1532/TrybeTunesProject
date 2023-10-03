@@ -8,6 +8,7 @@ function Album() {
   const [isLoading, setIsLoading] = useState(true);
   const [albumInfo, setAlbumInfo] = useState<AlbumType>();
   const [musics, setMusics] = useState<SongType[]>([]);
+  const [favorites, setFavorites] = useState<number[]>([]);
   const params = useParams();
 
   const { id } = params;
@@ -49,8 +50,11 @@ function Album() {
           return (
             <MusicCard
               key={ trackId }
+              trackId={ trackId }
               trackName={ trackName }
               previewUrl={ previewUrl }
+              favorites={ favorites }
+              setFavorites={ setFavorites }
             />
           );
         })}
