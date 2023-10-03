@@ -50,11 +50,7 @@ function Album() {
           return (
             <MusicCard
               key={ trackId }
-              trackId={ trackId }
-              trackName={ trackName }
-              previewUrl={ previewUrl }
-              favorites={ favorites }
-              setFavorites={ setFavorites }
+              song={ music }
             />
           );
         })}

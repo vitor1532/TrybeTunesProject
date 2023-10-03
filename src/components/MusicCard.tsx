@@ -4,35 +4,30 @@ import emptyHeart from '../images/empty_heart.png';
 import fullHeart from '../images/checked_heart.png';
 
 import '../styles/MusicCard.css';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { SongType } from '../types';
 
 type MusicCardProps = {
-  trackId: number,
-  trackName: string,
-  previewUrl: string,
-  favorites: number[],
-  setFavorites: React.Dispatch<React.SetStateAction<number[]>>
+  song: SongType
 };
 
-function MusicCard({
-  trackId,
-  trackName,
-  previewUrl,
-  favorites,
-  setFavorites,
-}: MusicCardProps) {
+function MusicCard({ song }: MusicCardProps) {
   const [isChecked, setIsChecked] = useState(false);
+  const { trackId, trackName, previewUrl } = song;
 
   const handleChange = () => {
     setIsChecked((prevFavorite) => !prevFavorite);
   };
 
   useEffect(() => {
-    if (isChecked && !favorites.includes(trackId)) {
-      setFavorites([
-        ...favorites,
-        trackId,
-      ]);
-    }
+    const getFavSongs = async () => {
+      if (isChecked) {
+        await addSong(song);
+      } else if (!isChecked) {
+        await removeSong(song);
+      }
+    };
+    getFavSongs();
   }, [isChecked]);
 
   return (
