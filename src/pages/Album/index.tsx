@@ -48,11 +48,14 @@ function Album() {
           const {
             trackId,
           } = music;
+          const isFavorite = favorites.some((favorite) => {
+            return favorite.trackId === music.trackId;
+          });
           return (
             <MusicCard
               key={ trackId }
               song={ music }
-              favorites={ favorites }
+              isFavorite={ isFavorite }
             />
           );
         })}

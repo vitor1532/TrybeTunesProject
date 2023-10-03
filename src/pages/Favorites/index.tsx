@@ -15,13 +15,14 @@ function Favorites() {
       setFavoriteSongs(favorites);
       setIsLoading(false);
     };
+    getFav();
   }, []);
 
   if (isLoading) return (<Loading />);
 
   return (
     favoriteSongs.map((song) => {
-      return (<MusicCard key={ song.trackId } song={ song } />);
+      return (<MusicCard key={ song.trackId } song={ song } isFavorite />);
     })
   );
 }

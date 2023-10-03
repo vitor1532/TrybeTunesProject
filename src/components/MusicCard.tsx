@@ -9,13 +9,11 @@ import { SongType } from '../types';
 
 type MusicCardProps = {
   song: SongType
-  favorites: SongType[]
+  isFavorite: boolean
 };
 
-function MusicCard({ song, favorites }: MusicCardProps) {
-  const [isChecked, setIsChecked] = useState(favorites.some((favorite) => {
-    return favorite.trackId === song.trackId;
-  }));
+function MusicCard({ song, isFavorite }: MusicCardProps) {
+  const [isChecked, setIsChecked] = useState(isFavorite);
   const { trackId, trackName, previewUrl } = song;
 
   const handleChange = () => {
