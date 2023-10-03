@@ -3,23 +3,26 @@ import { useParams } from 'react-router-dom';
 import getMusics from '../../services/musicsAPI';
 import { AlbumType, SongType } from '../../types';
 import MusicCard from '../../components/MusicCard';
+import { getFavoriteSongs } from '../../services/favoriteSongsAPI';
 
 function Album() {
   const [isLoading, setIsLoading] = useState(true);
   const [albumInfo, setAlbumInfo] = useState<AlbumType>();
   const [musics, setMusics] = useState<SongType[]>([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<SongType[]>([]);
   const params = useParams();
 
   const { id } = params;
 
   useEffect(() => {
-    setIsLoading(true);
     const getAlbumInfo = async () => {
       try {
+        setIsLoading(true);
         const response = await getMusics(id || '');
         const albumData = response[0];
         const songs = response.slice(1) as SongType[];
+        const favSongs = await getFavoriteSongs();
+        setFavorites(favSongs);
         setAlbumInfo(albumData);
         setMusics(songs);
         setIsLoading(false);
@@ -44,13 +47,12 @@ function Album() {
         {musics.map((music) => {
           const {
             trackId,
-            trackName,
-            previewUrl,
           } = music;
           return (
             <MusicCard
               key={ trackId }
               song={ music }
+              favorites={ favorites }
             />
           );
         })}

@@ -9,16 +9,18 @@ import { SongType } from '../types';
 
 type MusicCardProps = {
   song: SongType
+  favorites: SongType[]
 };
 
-function MusicCard({ song }: MusicCardProps) {
-  const [isChecked, setIsChecked] = useState(false);
+function MusicCard({ song, favorites }: MusicCardProps) {
+  const [isChecked, setIsChecked] = useState(favorites.some((favorite) => {
+    return favorite.trackId === song.trackId;
+  }));
   const { trackId, trackName, previewUrl } = song;
 
   const handleChange = () => {
     setIsChecked((prevFavorite) => !prevFavorite);
   };
-
   useEffect(() => {
     const getFavSongs = async () => {
       if (isChecked) {
