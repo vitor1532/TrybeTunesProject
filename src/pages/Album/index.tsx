@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import getMusics from '../../services/musicsAPI';
 import { AlbumType, SongType } from '../../types';
+import MusicCard from '../../components/MusicCard';
 
 function Album() {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,17 +47,11 @@ function Album() {
             previewUrl,
           } = music;
           return (
-            <div key={ trackId }>
-              <h3>{trackName}</h3>
-              <audio data-testid="audio-component" src={ previewUrl } controls>
-                <track kind="captions" />
-                O seu navegador não suporta o elemento
-                {' '}
-                {' '}
-                <code>audio</code>
-                .
-              </audio>
-            </div>
+            <MusicCard
+              key={ trackId }
+              trackName={ trackName }
+              previewUrl={ previewUrl }
+            />
           );
         })}
       </div>
