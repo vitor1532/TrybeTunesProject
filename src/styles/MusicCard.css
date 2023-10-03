@@ -1,6 +1,6 @@
 .custom-checkbox {
-  position: relative;
   cursor: pointer;
+  position: relative;
   padding-left: 30px;
 }
 
@@ -10,7 +10,6 @@
 }
 
 .custom-checkbox img {
-  width: 20px;
   height: 20px;
-  border: 1px solid #000;
+  width: 20px;
 }

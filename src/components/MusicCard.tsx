@@ -57,7 +57,6 @@ function MusicCard({
           ) : (<img src={ emptyHeart } alt="favorite" />)}
 
       </label>
-
     </div>
   );
 }
