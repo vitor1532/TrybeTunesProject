@@ -1,7 +1,7 @@
 .custom-checkbox {
   cursor: pointer;
-  position: relative;
   padding-left: 30px;
+  position: relative;
 }
 
 .custom-checkbox input {
