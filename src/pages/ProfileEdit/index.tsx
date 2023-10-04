@@ -1,84 +1,126 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
-import { UserType } from '../../types';
-import { getUser } from '../../services/userAPI';
+import { ChangeType, UserType } from '../../types';
+import { getUser, updateUser } from '../../services/userAPI';
 import './index.css';
 
 function ProfileEdit() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [user, setUser] = useState<UserType>();
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        const imageDataUrl = reader.result as string;
-        setSelectedImage(imageDataUrl);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
+  const [formInfo, setFormInfo] = useState<UserType>({
+    name: '',
+    email: '',
+    image: '',
+    description: '',
+  });
 
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true);
       const userResponse = await getUser();
       setUser(userResponse);
+      setFormInfo({
+        ...userResponse,
+      });
       setIsLoading(false);
     };
     fetchUser();
   }, []);
 
+  const {
+    name,
+    email,
+    image,
+    description,
+  } = formInfo;
+
+  const isFormValid = () => {
+    const validEmail = /^\S+@\S+\.\S+$/;
+
+    return (
+      validEmail.test(email)
+      && formInfo.name.length >= 3
+      && image.length !== 0
+      && description.length !== 0
+    );
+  };
+
+  function handleChange(event: ChangeType) {
+    const { target } = event;
+    setFormInfo({
+      ...formInfo,
+      [target.name]: target.value,
+    });
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    event.preventDefault();
+
+    await updateUser({ ...formInfo } as UserType);
+    navigate('/profile');
+    setIsLoading(false);
+  };
+
   if (isLoading) return (<Loading />);
 
   return (
-    <form>
-      <label htmlFor="image" data-testid="edit-input-image">
+    <form
+      onSubmit={ handleSubmit }
+    >
+      <label htmlFor="image">
         <input
-          type="file"
+          type="text"
           name="image"
           id="image"
-          accept="image/*"
-          onChange={ handleImageChange }
+          onChange={ handleChange }
+          value={ image }
+          data-testid="edit-input-image"
         />
-        {selectedImage
-        && <img className="placeholder-image" src={ selectedImage } alt="foto-perfil" />}
+        {image
+        && <img className="placeholder-image" src={ image } alt="foto-perfil" />}
 
       </label>
-      <label data-testid="edit-input-name" htmlFor="name">
-        <h4>Nome</h4>
+      <label htmlFor="name">
+        <h4>Name</h4>
         <input
           type="text"
           name="name"
           id="name"
-          placeholder="Fique à vontade para usar seu nome social"
+          placeholder="Feel free to use your social name"
+          value={ name }
+          onChange={ handleChange }
+          data-testid="edit-input-name"
         />
       </label>
-      <label data-testid="edit-input-email" htmlFor="email">
+      <label htmlFor="email">
         <h4>E-mail</h4>
         <input
           type="email"
           name="email"
           id="email"
-          placeholder="Escolha um e-mail que consulta diaraiamente"
+          placeholder="Choose an email that you check daily"
+          value={ email }
+          onChange={ handleChange }
+          data-testid="edit-input-email"
         />
       </label>
-      <label data-testid="edit-input-description" htmlFor="name">
-        <h4>Nome</h4>
-        <p>Fique à vontade para usar seu nome social</p>
+      <label htmlFor="description">
+        <h4>Description</h4>
         <textarea
           name="description"
           id="description"
-          placeholder="Sobre mim"
+          placeholder="About me"
           cols={ 30 }
           rows={ 10 }
+          value={ description }
+          onChange={ handleChange }
+          data-testid="edit-input-description"
         />
       </label>
+      <button data-testid="edit-button-save" disabled={ !isFormValid() }>Save</button>
     </form>
   );
 }
