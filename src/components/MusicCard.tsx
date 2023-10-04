@@ -10,18 +10,24 @@ import { SongType } from '../types';
 type MusicCardProps = {
   song: SongType
   isFavorite: boolean
+  onRemoveFromFavorites?: ((trackIdToRemove: number) => void) | undefined
 };
 
-function MusicCard({ song, isFavorite }: MusicCardProps) {
+function MusicCard(
+  { song, isFavorite, onRemoveFromFavorites = () => {} }: MusicCardProps,
+) {
   const [isChecked, setIsChecked] = useState(isFavorite);
   const { trackId, trackName, previewUrl } = song;
 
   const handleChange = () => {
     setIsChecked((prevFavorite) => !prevFavorite);
+    if (trackId && onRemoveFromFavorites) {
+      onRemoveFromFavorites(trackId);
+    }
   };
   useEffect(() => {
     const getFavSongs = async () => {
-      if (isChecked) {
+      if (isChecked && !isFavorite) {
         await addSong(song);
       } else if (!isChecked) {
         await removeSong(song);

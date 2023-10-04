@@ -18,11 +18,24 @@ function Favorites() {
     getFav();
   }, []);
 
+  const removeSongFromFavorites = (trackIdToRemove: number) => {
+    setFavoriteSongs((prevFavorites) => {
+      return prevFavorites.filter((song) => song.trackId !== trackIdToRemove);
+    });
+  };
+
   if (isLoading) return (<Loading />);
 
   return (
     favoriteSongs.map((song) => {
-      return (<MusicCard key={ song.trackId } song={ song } isFavorite />);
+      return (
+        <MusicCard
+          key={ song.trackId }
+          song={ song }
+          isFavorite
+          onRemoveFromFavorites={ removeSongFromFavorites }
+        />
+      );
     })
   );
 }
