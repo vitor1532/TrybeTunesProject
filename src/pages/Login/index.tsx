@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
+import { Button, Form, FormGroup } from 'react-bootstrap';
 import { ChangeType } from '../../types';
 import { createUser } from '../../services/userAPI';
 import Loading from '../../components/Loading';
@@ -43,9 +44,10 @@ function Login() {
 
   return (
     <div className="form-container">
-      <form onSubmit={ handleSubmit } className="login-form">
-        <label htmlFor="name">
-          <input
+      <Form onSubmit={ handleSubmit } className="login-form">
+        <FormGroup className="mb-3">
+          <Form.Label htmlFor="name">Digite seu nome</Form.Label>
+          <Form.Control
             data-testid="login-name-input"
             type="text"
             name="name"
@@ -54,14 +56,15 @@ function Login() {
             value={ formInfo.name }
             onChange={ handleChange }
           />
-        </label>
-        <button
+        </FormGroup>
+        <Button
           disabled={ isDisabled }
           data-testid="login-submit-button"
+          type="submit"
         >
           Entrar
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 }

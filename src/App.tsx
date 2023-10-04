@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
