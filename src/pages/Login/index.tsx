@@ -46,7 +46,7 @@ function Login() {
     <div className="form-container">
       <Form onSubmit={ handleSubmit } className="login-form">
         <FormGroup className="mb-3">
-          <Form.Label htmlFor="name">Digite seu nome</Form.Label>
+          <Form.Label htmlFor="name" />
           <Form.Control
             data-testid="login-name-input"
             type="text"
