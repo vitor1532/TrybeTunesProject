@@ -1,13 +1,13 @@
 
 .center-middle-container {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 20vh; /* This makes the container take up the entire viewport height */
+  display: flex;
+  height: 20vh;
+  justify-content: center;
 }
 
 .center-middle-form {
+  max-width: 400px;
   text-align: center;
-  width: 100%; /* Optionally, you can adjust the width of the form */
-  max-width: 400px; /* Adjust the maximum width as needed */
+  width: 100%;
 }
