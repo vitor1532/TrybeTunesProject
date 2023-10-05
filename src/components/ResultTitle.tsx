@@ -4,7 +4,7 @@ type ResultTitleProps = {
 
 function ResultTitle({ searchedArtist }: ResultTitleProps) {
   return (
-    <h2 className="m-3 p-3">
+    <h2 className="d-flex justify-content-center mb-5">
       Resultado de álbuns de:
       {' '}
       {searchedArtist}

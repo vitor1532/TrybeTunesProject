@@ -35,8 +35,15 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
             artistName,
           } = album;
           return (
-            <Col key={ collectionId } xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 }>
-              <Card className="p-0 m-5">
+            <Col
+              className="d-flex justify-content-center mb-5"
+              key={ collectionId }
+              xs={ 12 }
+              sm={ 6 }
+              md={ 4 }
+              lg={ 3 }
+            >
+              <Card style={ { width: '18rem' } }>
                 <Card.Img variant="top" src={ artworkUrl100 } alt="album-cover" />
                 <Card.Body>
                   <Card.Title>{collectionName}</Card.Title>
