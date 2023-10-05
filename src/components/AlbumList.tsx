@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { AlbumType } from '../types';
 
 type AlbumListProps = {
@@ -15,36 +16,49 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
     setSearchedArtist(artist);
     setArtist('');
   }, []);
-  if (albuns.length === 0 && artist === '') return (<h2>Nenhum álbum foi encontrado</h2>);
+  if (albuns.length === 0 && artist === '') {
+    return (
+      <h2 className="m-3 p-3">Nenhum álbum foi encontrado</h2>
+    );
+  }
   return (
     <>
-      <h2>
+      <h2 className="m-3 p-3">
         Resultado de álbuns de:
         {' '}
         {searchedArtist}
       </h2>
 
-      {albuns.map((album) => {
-        const {
-          collectionId,
-          artworkUrl100,
-          collectionName,
-          artistName,
-        } = album;
-        return (
-          <div key={ collectionId }>
-            <img src={ artworkUrl100 } alt="album-cover" />
-            <h3>{collectionName}</h3>
-            <p>{artistName}</p>
-            <Link
-              data-testid={ `link-to-album-${collectionId}` }
-              to={ `/album/${collectionId}` }
-            >
-              See Album
-            </Link>
-          </div>
-        );
-      })}
+      <Row className="d-flex justify-content-center">
+        {albuns.map((album) => {
+          const {
+            collectionId,
+            artworkUrl100,
+            collectionName,
+            artistName,
+          } = album;
+          return (
+            <Col key={ collectionId } xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 }>
+              <Card className="p-0 m-5">
+                <Card.Img variant="top" src={ artworkUrl100 } alt="album-cover" />
+                <Card.Body>
+                  <Card.Title>{collectionName}</Card.Title>
+                  <Card.Text>{artistName}</Card.Text>
+                </Card.Body>
+                <Button>
+                  <Link
+                    className="text-white text-decoration-none"
+                    data-testid={ `link-to-album-${collectionId}` }
+                    to={ `/album/${collectionId}` }
+                  >
+                    See Album
+                  </Link>
+                </Button>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     </>
   );
 }

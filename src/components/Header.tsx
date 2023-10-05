@@ -31,7 +31,7 @@ function Header() {
     return (
       <header data-testid="header-component">
 
-        <Navbar bg="primary" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark">
           <Container>
             <Nav className="me-auto">
               <NavLink
