@@ -58,6 +58,7 @@ function Login() {
           />
         </FormGroup>
         <Button
+          variant="success"
           disabled={ isDisabled }
           data-testid="login-submit-button"
           type="submit"

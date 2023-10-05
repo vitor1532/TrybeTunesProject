@@ -7,6 +7,7 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/profile/edit" element={ <ProfileEdit /> } />
       </Route>
-      {/* <Route path="/*" element={ <NotFound /> } /> */}
+      <Route path="/*" element={ <NotFound route="Route" /> } />
     </Routes>
   );
 }

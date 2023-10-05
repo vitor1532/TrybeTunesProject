@@ -52,6 +52,7 @@ function Search() {
               onChange={ handleChange }
             />
             <Button
+              variant="success"
               disabled={ isDisabled }
               data-testid="search-artist-button"
               type="submit"

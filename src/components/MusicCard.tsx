@@ -29,7 +29,8 @@ function MusicCard(
     const getFavSongs = async () => {
       if (isChecked && !isFavorite) {
         await addSong(song);
-      } else if (!isChecked) {
+      }
+      if (!isChecked) {
         await removeSong(song);
       }
     };

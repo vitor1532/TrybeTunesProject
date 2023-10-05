@@ -3,6 +3,7 @@ import Loading from '../../components/Loading';
 import { getFavoriteSongs } from '../../services/favoriteSongsAPI';
 import { SongType } from '../../types';
 import MusicCard from '../../components/MusicCard';
+import NotFound from '../NotFound';
 
 function Favorites() {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +26,10 @@ function Favorites() {
   };
 
   if (isLoading) return (<Loading />);
+
+  if (favoriteSongs.length === 0) {
+    return (<NotFound route="Favorites" />);
+  }
 
   return (
     favoriteSongs.map((song) => {
