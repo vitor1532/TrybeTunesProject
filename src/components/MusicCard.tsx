@@ -39,8 +39,9 @@ function MusicCard(
   }, [isChecked]);
 
   return (
-    <div>
-      <h3>{trackName}</h3>
+    <div className="music-card">
+      {/* <div className="music-info"> */}
+      <span>{trackName}</span>
       <audio data-testid="audio-component" src={ previewUrl } controls>
         <track kind="captions" />
         O seu navegador não suporta o elemento
@@ -49,6 +50,7 @@ function MusicCard(
         <code>audio</code>
         .
       </audio>
+      {/* </div> */}
       <label data-testid={ `checkbox-music-${trackId}` } className="custom-checkbox">
         <input
           checked={ isChecked }

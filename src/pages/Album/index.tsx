@@ -44,7 +44,8 @@ function Album() {
         <p data-testid="artist-name">{albumInfo?.artistName}</p>
       </div>
       <div className="musics-container">
-        <h3>Musics: </h3>
+        <h3>Musics</h3>
+        <hr />
         {musics.map((music) => {
           const {
             trackId,
