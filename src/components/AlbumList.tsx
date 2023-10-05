@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { AlbumType } from '../types';
+import ResultTitle from './ResultTitle';
 
 type AlbumListProps = {
   setArtist: React.Dispatch<React.SetStateAction<string>>
@@ -23,11 +24,7 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
   }
   return (
     <>
-      <h2 className="m-3 p-3">
-        Resultado de álbuns de:
-        {' '}
-        {searchedArtist}
-      </h2>
+      <ResultTitle searchedArtist={ searchedArtist } />
 
       <Row className="d-flex justify-content-center">
         {albuns.map((album) => {
@@ -45,7 +42,7 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
                   <Card.Title>{collectionName}</Card.Title>
                   <Card.Text>{artistName}</Card.Text>
                 </Card.Body>
-                <Button>
+                <Button variant="dark">
                   <Link
                     className="text-white text-decoration-none"
                     data-testid={ `link-to-album-${collectionId}` }
