@@ -19,8 +19,12 @@ function MusicCard(
   const [isChecked, setIsChecked] = useState(isFavorite);
   const { trackId, trackName, previewUrl } = song;
 
-  const handleChange = () => {
+  const handleChange = async () => {
     setIsChecked((prevFavorite) => !prevFavorite);
+    if (trackId && onRemoveFromFavorites) {
+      onRemoveFromFavorites(trackId);
+      await removeSong(song);
+    }
   };
   useEffect(() => {
     const getFavSongs = async () => {
@@ -29,9 +33,6 @@ function MusicCard(
       }
       if (!isChecked) {
         await removeSong(song);
-        if (trackId && onRemoveFromFavorites) {
-          onRemoveFromFavorites(trackId);
-        }
       }
     };
     getFavSongs();
