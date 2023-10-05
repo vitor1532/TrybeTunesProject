@@ -4,6 +4,7 @@ import getMusics from '../../services/musicsAPI';
 import { AlbumType, SongType } from '../../types';
 import MusicCard from '../../components/MusicCard';
 import { getFavoriteSongs } from '../../services/favoriteSongsAPI';
+import './index.css';
 
 function Album() {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,13 +37,13 @@ function Album() {
   if (isLoading) return (<h1>Carregando...</h1>);
 
   return (
-    <>
+    <div className="album-container">
       <div>
-        <img src={ albumInfo?.artworkUrl100 } alt="album-cover" />
+        <img className="album-cover" src={ albumInfo?.artworkUrl100 } alt="album-cover" />
         <h3 data-testid="album-name">{albumInfo?.collectionName}</h3>
         <p data-testid="artist-name">{albumInfo?.artistName}</p>
       </div>
-      <div>
+      <div className="musics-container">
         <h3>Musics: </h3>
         {musics.map((music) => {
           const {
@@ -52,15 +53,18 @@ function Album() {
             return favorite.trackId === music.trackId;
           });
           return (
-            <MusicCard
-              key={ trackId }
-              song={ music }
-              isFavorite={ isFavorite }
-            />
+            <>
+              <MusicCard
+                key={ trackId }
+                song={ music }
+                isFavorite={ isFavorite }
+              />
+              <hr />
+            </>
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
 

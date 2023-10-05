@@ -1,0 +1,13 @@
+.album-container {
+  display: flex;
+  justify-content: center;
+  margin: 155px;
+}
+
+.album-cover{
+  width: 300px;
+}
+
+.musics-container {
+  margin-left: 100px;
+}
