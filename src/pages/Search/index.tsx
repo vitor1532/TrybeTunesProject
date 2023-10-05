@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { AlbumType, ChangeType } from '../../types';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import AlbumList from '../../components/AlbumList';
 import Loading from '../../components/Loading';
+import './index.css';
 
 function Search() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,23 +38,29 @@ function Search() {
 
   return (
     <>
-      <form onSubmit={ handleSubmit }>
-        <input
-          data-testid="search-artist-input"
-          type="text"
-          name="artist"
-          id="artist"
-          placeholder="Nome do Artista"
-          value={ artist }
-          onChange={ handleChange }
-        />
-        <button
-          disabled={ isDisabled }
-          data-testid="search-artist-button"
-        >
-          Procurar
-        </button>
-      </form>
+      <div className="center-middle-container">
+        <Form onSubmit={ handleSubmit } className="center-middle-form">
+          <Form.Group className="d-flex align-items-center">
+            <Form.Control
+              className="me-2"
+              data-testid="search-artist-input"
+              type="text"
+              name="artist"
+              id="artist"
+              placeholder="Nome do Artista"
+              value={ artist }
+              onChange={ handleChange }
+            />
+            <Button
+              disabled={ isDisabled }
+              data-testid="search-artist-button"
+              type="submit"
+            >
+              Procurar
+            </Button>
+          </Form.Group>
+        </Form>
+      </div>
       {isFormClicked && (
         <AlbumList setArtist={ setArtist } artist={ artist } albuns={ albuns } />
       )}
