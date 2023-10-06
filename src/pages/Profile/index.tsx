@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import { UserType } from '../../types';
 import { getUser } from '../../services/userAPI';
 import Loading from '../../components/Loading';
 import './index.css';
 import avatar from '../../images/avatar.png';
-import { Button } from 'react-bootstrap';
 
 function Profile() {
   const [isLoading, setIsLoading] = useState(false);
