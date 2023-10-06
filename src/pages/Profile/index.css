@@ -1,0 +1,36 @@
+.profile-container {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.39);
+  display: flex;
+  padding: 30px;
+  width: 650px;
+}
+
+.profile-image {
+  border-radius: 1000px;
+  height: 200px;
+  margin-right: 200px;
+  width: 200px;
+}
+
+.info-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info {
+  background-color: rgb(33, 37, 41);
+  border-radius: 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px;
+  text-align: center;
+  width: 200px;
+}

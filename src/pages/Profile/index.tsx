@@ -3,15 +3,22 @@ import { Link } from 'react-router-dom';
 import { UserType } from '../../types';
 import { getUser } from '../../services/userAPI';
 import Loading from '../../components/Loading';
+import './index.css';
+import avatar from '../../images/avatar.png';
+import { Button } from 'react-bootstrap';
 
 function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<UserType>();
+  const [image, setImage] = useState(avatar);
 
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true);
       const userResponse = await getUser();
+      if (userResponse.image !== '') {
+        setImage(userResponse.image);
+      }
       setUser(userResponse);
       setIsLoading(false);
     };
@@ -21,15 +28,31 @@ function Profile() {
   if (isLoading) return (<Loading />);
 
   return (
-    <div>
-      <img data-testid="profile-image" src={ user?.image } alt="" />
-      <Link to="/profile/edit">Editar perfil</Link>
-      <h4>Nome</h4>
-      <p>{user?.name}</p>
-      <h4>E=mail</h4>
-      <p>{user?.email}</p>
-      <h4>Descrição</h4>
-      <p>{user?.description}</p>
+    <div className="profile-container">
+      <div className="image-container">
+        <img className="profile-image" data-testid="profile-image" src={ image } alt="" />
+      </div>
+      <div className="info-container">
+        <h4 className="info">Nome:</h4>
+        <p>{user?.name}</p>
+        <hr />
+        <h4 className="info">E-mail:</h4>
+        <p>{user?.email}</p>
+        <hr />
+        <h4 className="info">Descrição:</h4>
+        <p>{user?.description}</p>
+        <hr />
+        <Button
+          variant="success"
+        >
+          <Link
+            className="text-white text-decoration-none"
+            to="/profile/edit"
+          >
+            Editar perfil
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 }
