@@ -1,16 +1,13 @@
 .music-card {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: flex-end;
   width: 600px;
 }
 
 .music-card > span {
+  font-weight: 700;
   margin-right: auto;
-}
-
-.music-card > span {
-  font-weight: bold;
 }
 
 .custom-checkbox {
@@ -20,9 +17,9 @@
 }
 
 .custom-checkbox input {
+  margin-left: 5px;
   opacity: 0;
   position: absolute;
-  margin-left: 5px;
 }
 
 .custom-checkbox img {
