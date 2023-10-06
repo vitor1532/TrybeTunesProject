@@ -1,7 +1,7 @@
 .album-container {
   display: flex;
   justify-content: center;
-  margin: 155px;
+  margin: 50px 155px;
 }
 
 .album-cover{

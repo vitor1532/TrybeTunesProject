@@ -4,6 +4,7 @@ import { getFavoriteSongs } from '../../services/favoriteSongsAPI';
 import { SongType } from '../../types';
 import MusicCard from '../../components/MusicCard';
 import NotFound from '../NotFound';
+import './index.css';
 
 function Favorites() {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,16 +33,23 @@ function Favorites() {
   }
 
   return (
-    favoriteSongs.map((song) => {
-      return (
-        <MusicCard
-          key={ song.trackId }
-          song={ song }
-          isFavorite
-          onRemoveFromFavorites={ removeSongFromFavorites }
-        />
-      );
-    })
+    <div className="favorite-container">
+      <h1>Musicas Favoritas:</h1>
+      <div className="fav-music-container">
+        {favoriteSongs.map((song) => {
+          return (
+            <div className="fav-music" key={ song.trackId }>
+              <MusicCard
+                song={ song }
+                isFavorite
+                onRemoveFromFavorites={ removeSongFromFavorites }
+              />
+              <hr />
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
