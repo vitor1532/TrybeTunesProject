@@ -1,12 +1,12 @@
 .profile-container {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 10px;
   box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.39);
   display: flex;
+  left: 50%;
+  position: absolute;
   padding: 30px;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 650px;
 }
 
