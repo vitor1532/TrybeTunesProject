@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import Loading from './Loading';
 import { UserType } from '../types';
 import { getUser } from '../services/userAPI';
-import '../styles/Header.css';
+import NavComponent from './NavComponent';
 
 function Header() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,29 +32,7 @@ function Header() {
 
         <Navbar bg="dark" data-bs-theme="dark">
           <Container>
-            <Nav className="me-auto">
-              <NavLink
-                className="nav-link"
-                data-testid="link-to-search"
-                to="/search"
-              >
-                Search
-              </NavLink>
-              <NavLink
-                className="nav-link"
-                data-testid="link-to-favorites"
-                to="/favorites"
-              >
-                Favorites
-              </NavLink>
-              <NavLink
-                className="nav-link"
-                data-testid="link-to-profile"
-                to="/profile"
-              >
-                Profile
-              </NavLink>
-            </Nav>
+            <NavComponent />
             <Navbar.Brand href="/profile">
               <p data-testid="header-user-name">{user.name}</p>
             </Navbar.Brand>

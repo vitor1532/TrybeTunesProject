@@ -1,0 +1,19 @@
+.nav-container {
+  align-items: center;
+  color: #d2d2d2;
+  display: flex;
+}
+
+.nav-link {
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+}
+
+.icon {
+  margin: 15px 7px 15px 15px;
+}
+
+.route {
+  margin-right: 15px;
+}
