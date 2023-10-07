@@ -1,10 +1,12 @@
+import './index.css';
+
 type NotFoundProps = {
   route: string
 };
 
 function NotFound({ route }: NotFoundProps) {
   return (
-    <h1>
+    <h1 className="not-found">
       {route}
       {' '}
       Not Found
