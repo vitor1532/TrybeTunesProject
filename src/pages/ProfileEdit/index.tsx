@@ -24,6 +24,10 @@ function ProfileEdit() {
       setIsLoading(true);
       const userResponse = await getUser();
       setUser(userResponse);
+      const userImageFromLocalStorage = localStorage.getItem('userImage');
+      if (userImageFromLocalStorage) {
+        setImg(userImageFromLocalStorage);
+      }
       setFormInfo({
         ...userResponse,
       });

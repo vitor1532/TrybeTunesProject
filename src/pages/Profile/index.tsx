@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import { UserType } from '../../types';
 import { getUser } from '../../services/userAPI';
 import Loading from '../../components/Loading';
@@ -43,16 +42,13 @@ function Profile() {
         <h4 className="info">Description:</h4>
         <p>{user?.description}</p>
         <hr />
-        <Button
-          variant="success"
+
+        <Link
+          className="btn btn-success"
+          to="/profile/edit"
         >
-          <Link
-            className="text-white text-decoration-none"
-            to="/profile/edit"
-          >
-            Edit profile
-          </Link>
-        </Button>
+          Edit profile
+        </Link>
       </div>
     </div>
   );
