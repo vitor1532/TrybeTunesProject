@@ -47,7 +47,7 @@ function Search() {
               type="text"
               name="artist"
               id="artist"
-              placeholder="Nome do Artista"
+              placeholder="Artist Name"
               value={ artist }
               onChange={ handleChange }
             />
@@ -57,7 +57,7 @@ function Search() {
               data-testid="search-artist-button"
               type="submit"
             >
-              Procurar
+              Search
             </Button>
           </Form.Group>
         </Form>

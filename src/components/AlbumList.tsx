@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { AlbumType } from '../types';
 import ResultTitle from './ResultTitle';
 
@@ -49,15 +49,13 @@ function AlbumList({ setArtist, artist, albuns }: AlbumListProps) {
                   <Card.Title>{collectionName}</Card.Title>
                   <Card.Text>{artistName}</Card.Text>
                 </Card.Body>
-                <Button variant="dark">
-                  <Link
-                    className="text-white text-decoration-none"
-                    data-testid={ `link-to-album-${collectionId}` }
-                    to={ `/album/${collectionId}` }
-                  >
-                    See Album
-                  </Link>
-                </Button>
+                <Link
+                  className="btn btn-dark"
+                  data-testid={ `link-to-album-${collectionId}` }
+                  to={ `/album/${collectionId}` }
+                >
+                  See Album
+                </Link>
               </Card>
             </Col>
           );

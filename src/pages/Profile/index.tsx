@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import { UserType } from '../../types';
 import { getUser } from '../../services/userAPI';
 import Loading from '../../components/Loading';
@@ -16,8 +15,9 @@ function Profile() {
     const fetchUser = async () => {
       setIsLoading(true);
       const userResponse = await getUser();
-      if (userResponse.image !== '') {
-        setImage(userResponse.image);
+      const userImageFromLocalStorage = localStorage.getItem('userImage');
+      if (userImageFromLocalStorage) {
+        setImage(userImageFromLocalStorage);
       }
       setUser(userResponse);
       setIsLoading(false);
@@ -33,25 +33,22 @@ function Profile() {
         <img className="profile-image" data-testid="profile-image" src={ image } alt="" />
       </div>
       <div className="info-container">
-        <h4 className="info">Nome:</h4>
+        <h4 className="info">Name:</h4>
         <p>{user?.name}</p>
         <hr />
         <h4 className="info">E-mail:</h4>
         <p>{user?.email}</p>
         <hr />
-        <h4 className="info">Descrição:</h4>
+        <h4 className="info">Description:</h4>
         <p>{user?.description}</p>
         <hr />
-        <Button
-          variant="success"
+
+        <Link
+          className="btn btn-success"
+          to="/profile/edit"
         >
-          <Link
-            className="text-white text-decoration-none"
-            to="/profile/edit"
-          >
-            Editar perfil
-          </Link>
-        </Button>
+          Edit profile
+        </Link>
       </div>
     </div>
   );

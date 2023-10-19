@@ -52,7 +52,7 @@ function Login() {
             type="text"
             name="name"
             id="name"
-            placeholder="Nome"
+            placeholder="Type your name"
             value={ formInfo.name }
             onChange={ handleChange }
           />
@@ -63,7 +63,7 @@ function Login() {
           data-testid="login-submit-button"
           type="submit"
         >
-          Entrar
+          Log In
         </Button>
       </Form>
     </div>
