@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Loading from '../../components/Loading';
 import { ChangeType, UserType } from '../../types';
 import { getUser, updateUser } from '../../services/userAPI';
+import avatar from '../../images/avatar.png';
 import './index.css';
 
 function ProfileEdit() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<UserType>();
+  const [img, setImg] = useState('');
   const [formInfo, setFormInfo] = useState<UserType>({
     name: '',
     email: '',
@@ -43,17 +45,34 @@ function ProfileEdit() {
     return (
       validEmail.test(email)
       && formInfo.name.length >= 3
-      && image.length !== 0
       && description.length !== 0
     );
   };
 
+  const handleImagePreview = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target) {
+          const imageDataUrl = e.target.result as string;
+          setImg(imageDataUrl);
+          localStorage.setItem('userImage', imageDataUrl);
+        }
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
+
   function handleChange(event: ChangeType) {
     const { target } = event;
-    setFormInfo({
-      ...formInfo,
-      [target.name]: target.value,
-    });
+    if (target.name === 'image') {
+      handleImagePreview(event as ChangeEvent<HTMLInputElement>);
+    } else {
+      setFormInfo((prevFormInfo) => ({
+        ...prevFormInfo,
+        [target.name]: target.value,
+      }));
+    }
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -78,7 +97,7 @@ function ProfileEdit() {
           <Form.Group as={ Col }>
             <Form.Label>Select your image</Form.Label>
             <Form.Control
-              type="text"
+              type="file"
               name="image"
               id="image"
               value={ image }
@@ -87,8 +106,13 @@ function ProfileEdit() {
             />
           </Form.Group>
           <Form.Group as={ Col }>
-            {image
-        && <img className="placeholder-image" src={ image } alt="foto-perfil" />}
+            {img === ''
+              ? <img
+                  className="placeholder-image"
+                  src={ avatar }
+                  alt="foto-perfil"
+              />
+              : <img className="placeholder-image" src={ img } alt="foto-perfil" />}
           </Form.Group>
         </Row>
 

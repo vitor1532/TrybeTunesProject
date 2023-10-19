@@ -16,8 +16,9 @@ function Profile() {
     const fetchUser = async () => {
       setIsLoading(true);
       const userResponse = await getUser();
-      if (userResponse.image !== '') {
-        setImage(userResponse.image);
+      const userImageFromLocalStorage = localStorage.getItem('userImage');
+      if (userImageFromLocalStorage) {
+        setImage(userImageFromLocalStorage);
       }
       setUser(userResponse);
       setIsLoading(false);
