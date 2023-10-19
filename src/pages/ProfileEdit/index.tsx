@@ -76,7 +76,7 @@ function ProfileEdit() {
       >
         <Row>
           <Form.Group as={ Col }>
-            <Form.Label>Image</Form.Label>
+            <Form.Label>Select your image</Form.Label>
             <Form.Control
               type="text"
               name="image"

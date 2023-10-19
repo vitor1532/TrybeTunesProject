@@ -33,13 +33,13 @@ function Profile() {
         <img className="profile-image" data-testid="profile-image" src={ image } alt="" />
       </div>
       <div className="info-container">
-        <h4 className="info">Nome:</h4>
+        <h4 className="info">Name:</h4>
         <p>{user?.name}</p>
         <hr />
         <h4 className="info">E-mail:</h4>
         <p>{user?.email}</p>
         <hr />
-        <h4 className="info">Descrição:</h4>
+        <h4 className="info">Description:</h4>
         <p>{user?.description}</p>
         <hr />
         <Button
@@ -49,7 +49,7 @@ function Profile() {
             className="text-white text-decoration-none"
             to="/profile/edit"
           >
-            Editar perfil
+            Edit profile
           </Link>
         </Button>
       </div>

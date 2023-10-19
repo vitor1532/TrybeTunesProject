@@ -34,7 +34,7 @@ function Favorites() {
 
   return (
     <div className="favorite-container">
-      <h1>Musicas Favoritas:</h1>
+      <h1>Favorite songs:</h1>
       <div className="fav-music-container">
         {favoriteSongs.map((song) => {
           return (
